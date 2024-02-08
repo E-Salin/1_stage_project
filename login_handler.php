@@ -1,9 +1,9 @@
 <?php
 session_start();
+require_once("helper.php");
 
-if (empty(["email"]) or empty(['password'])) {
-    $_SESSION["message"] = "Вы не ввели логин или пароль.";
-    header("Location: /1_stage_project/login.php");
+if (empty($_POST["email"]) or empty($_POST['password'])) {
+    redirect_and_message("login.php", "Вы не ввели логин или пароль.");
 } else {
     $user_email = $_POST["email"];
     $user_password = $_POST["password"];
@@ -15,18 +15,15 @@ if (empty(["email"]) or empty(['password'])) {
     $stmt->execute(["email" => $user_email]);
     $results = $stmt->fetch();
 
-    if ($results["email"]) {
+    if ($stmt->rowCount() > 0) {
         if (password_verify($user_password, $results["password"])) {
             $_SESSION["login"] = $results["email"];
             $_SESSION["admin"] = $results["admin"];
-            $_SESSION["message"] = "Добро пожаловать!";
-            header("Location: /1_stage_project/users.php");
+            redirect_and_message("users.php", "Добро пожаловать!");
         } else {
-            $_SESSION["message"] = "Пароль неверный!";
-            header("Location: /1_stage_project/login.php");
+            redirect_and_message("login.php", "Пароль неверный!");
         }
     } else {
-        $_SESSION["message"] = "Пользователя с таким email не существует!";
-        header("Location: /1_stage_project/login.php");
+        redirect_and_message("login.php", "Пользователя с таким email не существует!");
     }
 }

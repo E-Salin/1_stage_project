@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("helper.php");
 
 $name = $_POST["name"];
 $job = $_POST["job"];
@@ -33,8 +34,7 @@ $results = $stmt->fetch();
 
 if ($results["email"])
 {
-    $_SESSION["message"] = "Пользователь с таким email уже существует";
-    header("Location: /1_stage_project/create_user.php");
+    redirect_and_message("users.php", "Пользователь с таким email уже существует");
 } else {
     $sql = "select id from status where status_ru = :status_ru";
     $stmt = $db->prepare($sql);
@@ -47,8 +47,7 @@ values (:email, :password, :name, :job, :phone, :address, :status, :image, :vk, 
     $stmt->execute(["email" => $email, "password" => password_hash($user_password, PASSWORD_DEFAULT), "name" => $name, "job" => $job,
         "phone" => $phone, "address"=> $address, "status" => $status_id["id"], "image"=> $file_name, "vk"=>$vk, "tg"=>$tg, "insta"=>$insta]);
 
-    $_SESSION["message"] = "Вы добавили нового пользователя";
-    header("Location: /1_stage_project/users.php");
+    redirect_and_message("users.php", "Вы добавили нового пользователя");
 }
 
 

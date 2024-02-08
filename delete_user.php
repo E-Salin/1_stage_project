@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("helper.php");
 
 if($_SESSION["admin"] or $_SESSION["login"] == $_GET["email"])
 {
@@ -12,13 +13,10 @@ if($_SESSION["admin"] or $_SESSION["login"] == $_GET["email"])
     $stmt->execute(["email" => $user_email]);
     if ($user_email == $_SESSION["login"])
     {
-        $_SESSION["message"] = "Кажется, вы удалили свой профиль";
-        header("Location: /1_stage_project/register.php");
+        redirect_and_message("register.php", "Кажется, вы удалили свой профиль");
     } else {
-        $_SESSION["message"] = "Пользователь удален";
-        header("Location: /1_stage_project/users.php");
+        redirect_and_message("users.php", "Пользователь удален");
     }
 } else {
-    $_SESSION["message"] = "Можно редактировать только свой  профиль";
-    header("Location: /1_stage_project/users.php");
+    redirect_and_message("users.php", "Можно редактировать только свой  профиль");
 }

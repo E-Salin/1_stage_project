@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once ("helper.php");
 
 if (isset($_FILES)) {
     $dir = "upload/";
@@ -17,8 +18,7 @@ if (isset($_FILES)) {
         $stmt->execute(["image" => $file_name, "email" => $_SESSION["user_email"]]);
     }
 
-    $_SESSION["message"] = "Аватар обновлен";
-    header("Location: /1_stage_project/users.php");
+    redirect_and_message("users.php", "Аватар обновлен");
 } else {
     exit(UPLOAD_ERR_OK);
 }

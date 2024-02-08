@@ -1,8 +1,9 @@
 <?php
 session_start();
+require_once("helper.php");
+
 if (!$_SESSION["login"]) {
-    $_SESSION["message"] = "Вы не авторизованы, введите логин и пароль для продолжения";
-    header("Location: /1_stage_project/login.php");
+    redirect_and_message("login.php", "Вы не авторизованы, введите логин и пароль для продолжения");
 } else {
     ($_SESSION["admin"] == true) ? $is_admin = true : $is_admin = false;
 

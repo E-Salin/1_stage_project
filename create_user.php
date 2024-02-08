@@ -1,6 +1,9 @@
 <?php
 session_start();
-if(!$_SESSION["admin"]) header("Location: /1_stage_project/login.php");
+require_once("helper.php");
+if(!$_SESSION["admin"]) {
+    redirect_and_message("users.php", "Создавать пользователя может только админ!");
+}
 
 include_once "db_conn.php";
 

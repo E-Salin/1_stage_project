@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("helper.php");
 
 $user_email = $_POST["email"];
 $new_user_name = $_POST["name"];
@@ -28,8 +29,7 @@ $stmt->execute([
     "email" => $user_email]);
 
 $_SESSION["login"] = $user_email;
-$_SESSION["message"] = "Профиль успешно обновлен";
-header("Location: /1_stage_project/page_profile.php");
+redirect_and_message("page_profile.php", "Профиль успешно обновлен");
 
 
 

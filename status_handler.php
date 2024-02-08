@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("helper.php");
 
 $email = $_SESSION["user_email"];
 $new_status_ru = $_POST["status"];
@@ -15,5 +16,4 @@ $sql = "update users set `status` = :status where `users`.`email` = :email";
 $stmt = $db->prepare($sql);
 $stmt->execute(["status" => (int)$new_status_id["id"],"email"=>$email]);
 
-$_SESSION["message"] = "Статус обновлен";
-header("Location: /1_stage_project/users.php");
+redirect_and_message("users.php", "Статус обновлен");
