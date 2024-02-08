@@ -26,7 +26,7 @@ if (empty(["email"]) or empty(['password']))
         $sql = "insert into users(email, password) values(:email, :password)";
         $stmt = $db->prepare($sql);
         $stmt->execute(["email" => $user_email, "password" => password_hash($user_password, PASSWORD_DEFAULT)]);
-        $_SESSION["message"] = "Вы успешно рарегистрировались";
+        $_SESSION["message"] = "Вы успешно зарегистрировались";
         header("Location: /1_stage_project/login.php");
     }
 }
