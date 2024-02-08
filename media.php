@@ -1,6 +1,8 @@
 <?php
 session_start();
-if(!$_SESSION["admin"]) header("Location: /1_stage_project/login.php");
+require_once ("check_access.php");
+check_access($_GET["email"]);
+
 $user_email = $_SESSION["user_email"] = $_GET["email"];
 
 include_once "db_conn.php";

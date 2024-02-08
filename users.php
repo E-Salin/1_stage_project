@@ -99,7 +99,7 @@ if (!$_SESSION["login"]) {
                                         <a class="dropdown-item" href="edit.php?email=<?php echo $user["email"]?>&name=<?php echo $user["name"]?>&job=<?php echo $user["job"]?>&phone=<?php echo $user["phone"]?>&address=<?php echo $user["address"]?>">
                                             <i class="fa fa-edit"></i>
                                         Редактировать</a>
-                                        <a class="dropdown-item" href="security.html">
+                                        <a class="dropdown-item" href="security.php?email=<?php echo $user["email"]?>">
                                             <i class="fa fa-lock"></i>
                                         Безопасность</a>
                                         <a class="dropdown-item" href="status.php?email=<?php echo $user["email"]?>">
@@ -109,7 +109,7 @@ if (!$_SESSION["login"]) {
                                             <i class="fa fa-camera"></i>
                                             Загрузить аватар
                                         </a>
-                                        <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                        <a href="delete_user.php?email=<?php echo $user["email"]?>" class="dropdown-item" onclick="return confirm('are you sure?');">
                                             <i class="fa fa-window-close"></i>
                                             Удалить
                                         </a>

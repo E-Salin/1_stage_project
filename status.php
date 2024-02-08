@@ -1,7 +1,9 @@
-<?php session_start();
-if(!$_SESSION["admin"]) header("Location: /1_stage_project/login.php");
+<?php
+session_start();
+require_once ("check_access.php");
+check_access($_GET["email"]);
+
 $_SESSION["user_email"] = $_GET["email"];
-var_dump($_SESSION);
 
 include_once "db_conn.php";
 $sql = "select * from status";

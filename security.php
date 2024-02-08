@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once ("check_access.php");
+check_access($_GET["email"]);
+
+$user_email = $_SESSION["user_email"] = $_GET["email"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +46,7 @@
             </h1>
 
         </div>
-        <form action="">
+        <form action="security_handler.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -50,19 +58,19 @@
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="john@example.com">
+                                    <input type="text" name="email" id="simpleinput" class="form-control" value="<?php echo $user_email; ?>">
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" name="password" id="simpleinput" class="form-control">
                                 </div>
 
                                 <!-- password confirmation-->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Подтверждение пароля</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" name="repeat_password" id="simpleinput" class="form-control">
                                 </div>
 
 

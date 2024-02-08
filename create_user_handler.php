@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $name = $_POST["name"];
 $job = $_POST["job"];
@@ -7,10 +8,21 @@ $address = $_POST["address"];
 $email = $_POST["email"];
 $user_password = $_POST["user_password"];
 $status = $_POST["status"];
-$image = $_POST["image"];
+$file_name = "upload/demo.jpg";
 $vk = $_POST["vk"];
 $tg = $_POST["tg"];
 $insta = $_POST["insta"];
+
+var_dump($_FILES);
+
+if (isset($_FILES))
+{
+    $dir = "upload/";
+    $tmp_dir = $_FILES["image"]["tmp_name"];
+    $file_extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+    $file_name = $dir . uniqid() . '.' . $file_extension;
+    move_uploaded_file($tmp_dir, $file_name);
+}
 
 include_once "db_conn.php";
 
@@ -33,7 +45,7 @@ if ($results["email"])
 values (:email, :password, :name, :job, :phone, :address, :status, :image, :vk, :tg, :insta)";
     $stmt = $db->prepare($sql);
     $stmt->execute(["email" => $email, "password" => password_hash($user_password, PASSWORD_DEFAULT), "name" => $name, "job" => $job,
-        "phone" => $phone, "address"=> $address, "status" => $status_id["id"], "image"=>$image, "vk"=>$vk, "tg"=>$tg, "insta"=>$insta]);
+        "phone" => $phone, "address"=> $address, "status" => $status_id["id"], "image"=> $file_name, "vk"=>$vk, "tg"=>$tg, "insta"=>$insta]);
 
     $_SESSION["message"] = "Вы добавили нового пользователя";
     header("Location: /1_stage_project/users.php");

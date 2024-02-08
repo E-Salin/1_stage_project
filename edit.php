@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once ("check_access.php");
+check_access($_GET["email"]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -19,6 +19,7 @@ if (empty(["email"]) or empty(['password'])) {
         if (password_verify($user_password, $results["password"])) {
             $_SESSION["login"] = $results["email"];
             $_SESSION["admin"] = $results["admin"];
+            $_SESSION["message"] = "Добро пожаловать!";
             header("Location: /1_stage_project/users.php");
         } else {
             $_SESSION["message"] = "Пароль неверный!";
