@@ -132,13 +132,13 @@ if (!$_SESSION["login"]) {
                                 <address class="fs-sm fw-400 mt-4 text-muted">
                                     <i class="fas fa-map-pin mr-2"></i> <?php echo $user["address"]?></address>
                                 <div class="d-flex flex-row">
-                                    <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
+                                    <a href="<?php echo $user["vk"]?>" class="mr-2 fs-xxl" style="color:#4680C2">
                                         <i class="fab fa-vk"></i>
                                     </a>
-                                    <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
+                                    <a href="<?php echo $user["tg"]?>" class="mr-2 fs-xxl" style="color:#38A1F3">
                                         <i class="fab fa-telegram"></i>
                                     </a>
-                                    <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
+                                    <a href="<?php echo $user["insta"]?>" class="mr-2 fs-xxl" style="color:#E1306C">
                                         <i class="fab fa-instagram"></i>
                                     </a>
                                 </div>
