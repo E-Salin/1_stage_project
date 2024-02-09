@@ -1,15 +1,8 @@
 <?php
 session_start();
 require_once("helper.php");
-if(!$_SESSION["admin"]) {
-    redirect_and_message("users.php", "Создавать пользователя может только админ!");
-}
-
-include_once "db_conn.php";
-
-$sql_status = "select * from status";
-$stmt = $db->query($sql_status);
-$status = $stmt->fetchAll();
+is_admin();
+$status = get_statuses();
 ?>
 <!DOCTYPE html>
 <html lang="en">

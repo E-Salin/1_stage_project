@@ -1,15 +1,10 @@
 <?php
 session_start();
-require_once ("check_access.php");
+require_once ("helper.php");
 check_access($_GET["email"]);
 
 $user_email = $_SESSION["user_email"] = $_GET["email"];
-
-include_once "db_conn.php";
-$sql = "select image from users where `users`.`email` = :email";
-$stmt = $db->prepare($sql);
-$stmt->execute(["email" => $user_email]);
-$image = $stmt->fetch();
+$user = get_user_by_email($user_email);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +56,7 @@ $image = $stmt->fetch();
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="<?php echo $image["image"]?>" alt="" class="img-responsive" width="200">
+                                    <img src="<?php echo $user["image"]?>" alt="" class="img-responsive" width="200">
                                 </div>
 
                                 <div class="form-group">

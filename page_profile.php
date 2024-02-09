@@ -1,15 +1,7 @@
 <?php
 session_start();
-
-if ($_SESSION["login"])
-{
-    include_once "db_conn.php";
-    $sql = "select * from users where email = :email";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(["email" => $_SESSION["login"]]);
-    $user = $stmt->fetch();
-}
-
+require_once ("helper.php");
+$user = get_user_by_email($_SESSION["user_email"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">

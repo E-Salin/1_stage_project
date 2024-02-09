@@ -1,14 +1,9 @@
 <?php
 session_start();
-require_once ("check_access.php");
+require_once ("helper.php");
 check_access($_GET["email"]);
-
 $_SESSION["user_email"] = $_GET["email"];
-
-include_once "db_conn.php";
-$sql = "select * from status";
-$stmt = $db->query($sql);
-$status = $stmt->fetchAll();
+$status = get_statuses();
 ?>
 <!DOCTYPE html>
 <html lang="en">
