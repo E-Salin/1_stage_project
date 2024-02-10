@@ -21,6 +21,6 @@ if ($result)
     redirect_and_message("users.php", "Такой email уже существует");
 } else {
     update_auth_information($old_email, $new_email, $new_password);
-    $_SESSION["user_email"] = $new_email;
+    $_SESSION["user_email"] = $_SESSION["login"] =$new_email;
     redirect_and_message("users.php", "Данные обновлены");
 }

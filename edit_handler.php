@@ -9,6 +9,7 @@ $new_user_phone = $_POST["phone"];
 $new_user_address = $_POST["address"];
 
 edit_user_by_email($user_email, $new_user_name, $new_user_job, $new_user_phone, $new_user_address);
+$_SESSION["user_email"] = $user_email;
 redirect_and_message("page_profile.php", "Профиль успешно обновлен");
 
 

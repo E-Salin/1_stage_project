@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once ("helper.php");
+var_dump($_SESSION);
 $user = get_user_by_email($_SESSION["user_email"]);
 ?>
 <!DOCTYPE html>

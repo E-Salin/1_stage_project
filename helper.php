@@ -27,6 +27,13 @@ function redirect_and_message($location, $message)
     header("Location: /1_stage_project/" . $location);
 }
 
+function get_all_users()
+{
+    $db = db_conn();
+    $sql = "select * from users inner join `status` on `users`.`status` = `status`.`id`";
+    $stmt = $db->query($sql);
+    return $stmt->fetchAll();
+}
 function get_user_by_email($email)
 {
     $db = db_conn();
@@ -96,8 +103,7 @@ function set_status($email, $status)
     $db = db_conn();
     $sql = "UPDATE `users` SET `status` = :status WHERE `users`.`email` = :email";
     $stmt = $db->prepare($sql);
-    $stmt->execute(["status" => $status, "email" => $email]);
-    redirect_and_message("page_profile.php", "Профиль успешно обновлен");
+    $stmt->execute(["status" => (int)$status["id"], "email" => $email]);
 }
 
 function set_image($email, $file_dir)
@@ -106,7 +112,6 @@ function set_image($email, $file_dir)
     $sql = "UPDATE `users` SET `image` = :image WHERE `users`.`email` = :email";
     $stmt = $db->prepare($sql);
     $stmt->execute(["image" => $file_dir, "email" => $email]);
-    redirect_and_message("page_profile.php", "Профиль успешно обновлен");
 }
 
 function add_socials($email, $vk, $tg, $insta)

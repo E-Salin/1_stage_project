@@ -8,15 +8,11 @@ if (empty($_POST["email"]) or empty($_POST['password'])) {
     $user_email = $_POST["email"];
     $user_password = $_POST["password"];
 
-    include_once "db_conn.php";
+    $results = get_user_by_email($user_email);
 
-    $sql = "select email,password,admin from users where email=:email";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(["email" => $user_email]);
-    $results = $stmt->fetch();
-
-    if ($stmt->rowCount() > 0) {
+    if ($results) {
         if (password_verify($user_password, $results["password"])) {
+            var_dump($results);
             $_SESSION["login"] = $results["email"];
             $_SESSION["admin"] = $results["admin"];
             redirect_and_message("users.php", "Добро пожаловать!");

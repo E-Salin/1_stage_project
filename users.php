@@ -7,11 +7,7 @@ if (!$_SESSION["login"]) {
 } else {
     ($_SESSION["admin"] == true) ? $is_admin = true : $is_admin = false;
 
-    # Получаем список всех пользователей
-    include_once "db_conn.php";
-    $sql = "select * from users inner join `status` on `users`.`status` = `status`.`id`";
-    $stmt = $db->query($sql);
-    $users = $stmt->fetchAll();
+    $users = get_all_users();
 }
 ?>
 <!DOCTYPE html>

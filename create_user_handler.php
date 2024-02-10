@@ -27,6 +27,7 @@ if ($results)
     add_socials($email, $vk, $tg, $insta);
     set_status($email, $status_id);
     set_image($email, $file_name);
+    redirect_and_message("users.php", "Профиль создан");
 }
 
 
